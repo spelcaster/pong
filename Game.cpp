@@ -1,26 +1,35 @@
 #include "include/Game.hpp"
 
 Game::Game():
-    mWindow(sf::VideoMode(800,600), "Pong"),
-    mPlayer()
+    mWindow(sf::VideoMode(1600,900), "Pong"),
+    mBall()
 {
-    mPlayer.setRadius(40.f);
-    mPlayer.setPosition(100.f, 100.f);
-    mPlayer.setFillColor(sf::Color::Cyan);
+    // o tamanho da bolinha
+    mBall.setRadius(40.f);
+    // posicionamento inicial da bolinha
+    mBall.setPosition(100.f, 100.f);
+    //cor da bolinha
+    mBall.setFillColor(sf::Color::Cyan);
 }
 
 void Game::run()
 {
+    // clock de pro
     sf::Clock clock;
 
     // removendo o lag
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
 
+    // janela do jogo
     while (mWindow.isOpen())
     {
+        // processa eventos na tela
         proccessEvents();
+
+        // evitar lag
         timeSinceLastUpdate += clock.restart();
 
+        // loop de atualização dos frames
         while (timeSinceLastUpdate > TIME_PER_FRAME) {
             timeSinceLastUpdate -= TIME_PER_FRAME;
             update(TIME_PER_FRAME);
@@ -53,42 +62,40 @@ void Game::proccessEvents()
 
 void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 {
-
     if (key == sf::Keyboard::W) {
-        mIsMovingUp = isPressed;
+        mBall.setMovingUp(isPressed);
     } else if (key == sf::Keyboard::S) {
-        mIsMovingDown = isPressed;
+        mBall.setMovingDown(isPressed);
     } else if (key == sf::Keyboard::A) {
-        mIsMovingLeft = isPressed;
+        mBall.setMovingLeft(isPressed);
     } else if (key == sf::Keyboard::D) {
-        mIsMovingRight = isPressed;
+        mBall.setMovingRight(isPressed);
     }
-
 }
 
 void Game::update(sf::Time timePerFrame)
 {
     sf::Vector2f movement(0.f, 0.f);
 
-    if (mIsMovingUp) {
+    if ( mBall.isMovingUp() ) {
         movement.y -= 100.f;
     }
-    if (mIsMovingDown) {
+    if ( mBall.isMovingDown() ) {
         movement.y += 100.f;
     }
-    if (mIsMovingLeft) {
+    if ( mBall.isMovingLeft() ) {
         movement.x -= 100.f;
     }
-    if (mIsMovingRight) {
+    if ( mBall.isMovingRight() ) {
         movement.x += 100.f;
     }
 
-    mPlayer.move(movement * timePerFrame.asSeconds());
+    mBall.move(movement * timePerFrame.asSeconds());
 }
 
 void Game::render()
 {
     mWindow.clear();
-    mWindow.draw(mPlayer);
+    mWindow.draw(mBall);
     mWindow.display();
 }

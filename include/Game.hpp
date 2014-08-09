@@ -2,17 +2,12 @@
 #define GAME_PONG
 
 #include <SFML/Graphics.hpp>
+#include "Ball.hpp"
 
-const sf::Time TIME_PER_FRAME = sf::seconds(1.f / 60.f);
+const sf::Time TIME_PER_FRAME = sf::seconds(1.f / 60.f); //0,016666667
 
 class Game
 {
-    public:
-        bool mIsMovingUp;
-        bool mIsMovingDown;
-        bool mIsMovingLeft;
-        bool mIsMovingRight;
-
     public:
         Game();
         void run();
@@ -24,8 +19,12 @@ class Game
         void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
 
     private:
+        // janela do jogo
         sf::RenderWindow mWindow;
-        sf::CircleShape mPlayer;
+        // bolinha
+        Ball mBall;
+
+
 };
 
 #endif
