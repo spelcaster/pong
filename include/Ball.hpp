@@ -17,6 +17,8 @@ class Ball : public CircleShape
         // construtor
         Ball();
 
+        void update(const sf::Time &timePerFrame, float winHeight);
+
         bool isMovingUp() const;
         bool isMovingDown() const;
         bool isMovingRight() const;

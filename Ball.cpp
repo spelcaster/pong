@@ -10,49 +10,22 @@ Ball::Ball() : CircleShape()
 
     //cor da bolinha
     this->setFillColor(sf::Color::Cyan);
-
-    this->setMovingUp(false);
-    this->setMovingDown(false);
-    this->setMovingRight(false);
-    this->setMovingLeft(false);
 }
 
-bool Ball::isMovingUp() const
+void Ball::update(const sf::Time &timePerFrame, float winHeight)
 {
-    return this->movingUp;
-}
+    sf::Vector2f movement(0.f, 0.f);
 
-bool Ball::isMovingDown() const
-{
-    return this->movingDown;
-}
+    static int stepX = 50;
+    static int stepY = 300;
 
-bool Ball::isMovingRight() const
-{
-    return this->movingRight;
-}
+    if ( getPosition().y < 0)
+        stepY *= -1;
+    if ( getPosition().y >= 870.f - 40.f - 10.f )
+        stepY *= -1;
 
-bool Ball::isMovingLeft() const
-{
-    return this->movingLeft;
-}
+    movement.x += stepX;
+    movement.y += stepY;
 
-void Ball::setMovingUp(bool isMoving)
-{
-    this->movingUp = isMoving;
-}
-
-void Ball::setMovingDown(bool isMoving)
-{
-    this->movingDown = isMoving;
-}
-
-void Ball::setMovingRight(bool isMoving)
-{
-    this->movingRight = isMoving;
-}
-
-void Ball::setMovingLeft(bool isMoving)
-{
-    this->movingLeft = isMoving;
+    move(movement * timePerFrame.asSeconds());
 }

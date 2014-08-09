@@ -61,6 +61,7 @@ void Game::update(sf::Time timePerFrame)
 {
     mPlayerOne.update(timePerFrame, mWindow.getSize().y);
     mPlayerTwo.update(timePerFrame, mWindow.getSize().y);
+    mBall.update(timePerFrame, mWindow.getSize().y);
 }
 
 void Game::render()
