@@ -1,4 +1,5 @@
 #include "include/Rectangle.hpp"
+#include <algorithm>
 
 Rectangle::Rectangle(float x, float y, Keyboard::Key keyUp, Keyboard::Key keyDown)
     : RectangleShape()
@@ -41,13 +42,13 @@ void Rectangle::handleInput(const sf::Keyboard::Key &key, bool isPressed)
         setMovingDown(isPressed);
 }
 
-void Rectangle::update(const sf::Time &timePerFrame)
+void Rectangle::update(const sf::Time &timePerFrame, float winHeight)
 {
     sf::Vector2f movement(0.f, 0.f);
 
-    if ( isMovingUp() )
+    if ( isMovingUp() && (getPosition().y > 1))
         movement.y -= 200.f;
-    if ( isMovingDown() )
+    if ( isMovingDown() && (getPosition().y <= winHeight - 150.f - 1))
         movement.y += 200.f;
 
     move(movement * timePerFrame.asSeconds());

@@ -24,7 +24,7 @@ class Rectangle : public RectangleShape
         void setMovingDown(bool isMoving);
 
         void handleInput(const sf::Keyboard::Key &key, bool isPressed);
-        void update(const sf::Time &timePerFrame);
+        void update(const sf::Time &timePerFrame, float winHeight);
 };
 
 #endif
