@@ -59,9 +59,11 @@ void Game::proccessEvents()
 
 void Game::update(sf::Time timePerFrame)
 {
+    bool changeDirection = mBall.getGlobalBounds().intersects(mPlayerOne.getGlobalBounds()) ||
+        mBall.getGlobalBounds().intersects(mPlayerTwo.getGlobalBounds()) ;
     mPlayerOne.update(timePerFrame, mWindow.getSize().y);
     mPlayerTwo.update(timePerFrame, mWindow.getSize().y);
-    mBall.update(timePerFrame, mWindow.getSize().y);
+    mBall.update(timePerFrame, mWindow.getSize().y, changeDirection);
 }
 
 void Game::render()
