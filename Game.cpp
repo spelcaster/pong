@@ -3,7 +3,8 @@
 Game::Game():
     mWindow(sf::VideoMode(1600,900), "Pong"),
     mBall(),
-    mPlayerOne()
+    mPlayerOne(30.f, 375.f, sf::Keyboard::W, sf::Keyboard::S),
+    mPlayerTwo(1520.f, 375.f, sf::Keyboard::Numpad8, sf::Keyboard::Numpad2)
 {
 }
 
@@ -33,7 +34,6 @@ void Game::run()
     }
 }
 
-
 void Game::proccessEvents()
 {
     sf::Event event;
@@ -42,10 +42,12 @@ void Game::proccessEvents()
 
         switch (event.type) {
             case sf::Event::KeyPressed:
-                handlePlayerInput(event.key.code, true);
+                mPlayerOne.handleInput(event.key.code, true);
+                mPlayerTwo.handleInput(event.key.code, true);
                 break;
             case sf::Event::KeyReleased:
-                handlePlayerInput(event.key.code, false);
+                mPlayerOne.handleInput(event.key.code, false);
+                mPlayerTwo.handleInput(event.key.code, false);
                 break;
             case sf::Event::Closed:
                 mWindow.close();
@@ -55,37 +57,10 @@ void Game::proccessEvents()
 
 }
 
-void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
-{
-    if (key == sf::Keyboard::W) {
-        mBall.setMovingUp(isPressed);
-    } else if (key == sf::Keyboard::S) {
-        mBall.setMovingDown(isPressed);
-    } else if (key == sf::Keyboard::A) {
-        mBall.setMovingLeft(isPressed);
-    } else if (key == sf::Keyboard::D) {
-        mBall.setMovingRight(isPressed);
-    }
-}
-
 void Game::update(sf::Time timePerFrame)
 {
-    sf::Vector2f movement(0.f, 0.f);
-
-    if ( mBall.isMovingUp() ) {
-        movement.y -= 100.f;
-    }
-    if ( mBall.isMovingDown() ) {
-        movement.y += 100.f;
-    }
-    if ( mBall.isMovingLeft() ) {
-        movement.x -= 100.f;
-    }
-    if ( mBall.isMovingRight() ) {
-        movement.x += 100.f;
-    }
-
-    mBall.move(movement * timePerFrame.asSeconds());
+    mPlayerOne.update(timePerFrame);
+    mPlayerTwo.update(timePerFrame);
 }
 
 void Game::render()
@@ -93,5 +68,6 @@ void Game::render()
     mWindow.clear();
     mWindow.draw(mBall);
     mWindow.draw(mPlayerOne);
+    mWindow.draw(mPlayerTwo);
     mWindow.display();
 }

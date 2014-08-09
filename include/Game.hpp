@@ -17,7 +17,6 @@ class Game
         void proccessEvents();
         void update(sf::Time timePerFrame);
         void render();
-        void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
 
     private:
         // janela do jogo
@@ -28,6 +27,9 @@ class Game
 
         // raquete do jogador 1
         Rectangle mPlayerOne;
+
+        // raquete do jogador 2
+        Rectangle mPlayerTwo;
 };
 
 #endif
