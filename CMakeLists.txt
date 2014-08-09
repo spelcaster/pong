@@ -38,7 +38,7 @@ include_directories (
 
 add_subdirectory (include)
 
-add_executable (${EXECUTABLE_NAME} main.cpp Game.cpp Ball.cpp)
+add_executable (${EXECUTABLE_NAME} main.cpp Game.cpp Ball.cpp Rectangle.cpp)
 
 target_link_libraries (${EXECUTABLE_NAME} ${SFML_LIBRARIES})
 

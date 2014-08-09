@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Ball.hpp"
+#include "Rectangle.hpp"
 
 const sf::Time TIME_PER_FRAME = sf::seconds(1.f / 60.f); //0,016666667
 
@@ -21,10 +22,12 @@ class Game
     private:
         // janela do jogo
         sf::RenderWindow mWindow;
+
         // bolinha
         Ball mBall;
 
-
+        // raquete do jogador 1
+        Rectangle mPlayerOne;
 };
 
 #endif

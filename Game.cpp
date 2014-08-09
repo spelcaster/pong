@@ -2,14 +2,9 @@
 
 Game::Game():
     mWindow(sf::VideoMode(1600,900), "Pong"),
-    mBall()
+    mBall(),
+    mPlayerOne()
 {
-    // o tamanho da bolinha
-    mBall.setRadius(40.f);
-    // posicionamento inicial da bolinha
-    mBall.setPosition(100.f, 100.f);
-    //cor da bolinha
-    mBall.setFillColor(sf::Color::Cyan);
 }
 
 void Game::run()
@@ -97,5 +92,6 @@ void Game::render()
 {
     mWindow.clear();
     mWindow.draw(mBall);
+    mWindow.draw(mPlayerOne);
     mWindow.display();
 }

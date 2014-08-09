@@ -2,6 +2,15 @@
 
 Ball::Ball() : CircleShape()
 {
+    // o tamanho da bolinha
+    this->setRadius(40.f);
+
+    // posicionamento inicial da bolinha
+    this->setPosition(100.f, 100.f);
+
+    //cor da bolinha
+    this->setFillColor(sf::Color::Cyan);
+
     this->setMovingUp(false);
     this->setMovingDown(false);
     this->setMovingRight(false);
